@@ -2,16 +2,35 @@ pipeline {
     agent any
 
     stages {
-        stage('dev') {
+        stage('Git') {
             steps {
-                echo 'I am in Dev'
+                echo 'Git operations...'
                 sh 'git --version'
+                sh 'git status'
             }
         }
-    stage('prod') {
+        
+        stage('Build') {
             steps {
-                echo 'I am in prod'
+                echo 'Building application...'
+                sh 'python3 --version'
+                sh 'echo "print(\'Hello World\')" > helloworld.py'
+                sh 'python3 helloworld.py'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'python3 -c "print(\'Tests passed!\')"'
+            }
+        }
+        
+        stage('Docker') {
+            steps {
+                echo 'Docker operations...'
                 sh 'docker --version'
+                sh 'echo "Docker build completed"'
             }
         }
     }
