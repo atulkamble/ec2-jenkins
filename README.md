@@ -55,6 +55,206 @@
 
 ---
 
+## 🚀 Jenkins Agents – Theory & Key Points to Remember
+
+---
+
+## 1️⃣ What is a Jenkins Agent?
+
+A **Jenkins Agent (formerly called Slave)** is a machine that connects to the Jenkins Controller and executes build jobs.
+
+🔹 Controller = Brain (manages jobs, UI, scheduling)
+🔹 Agent = Worker (executes builds, tests, deployments)
+
+👉 Used for **distributed builds**, scalability, and workload separation.
+
+---
+
+## 2️⃣ Why Jenkins Agents are Needed?
+
+✔️ Parallel builds
+✔️ Load distribution
+✔️ Different OS environments (Linux/Windows/macOS)
+✔️ Tool-specific environments (Java, Docker, Node, etc.)
+✔️ Isolate heavy workloads
+✔️ Secure production deployments
+
+---
+
+## 3️⃣ Jenkins Architecture (Controller + Agents)
+
+```
+             +------------------+
+             |  Jenkins         |
+             |  Controller      |
+             +------------------+
+                     |
+      ---------------------------------
+      |               |               |
++-------------+  +-------------+  +-------------+
+| Linux Agent |  | Windows     |  | Docker      |
+| (Build)     |  | Agent       |  | Agent       |
++-------------+  +-------------+  +-------------+
+```
+
+Controller schedules → Agents execute.
+
+---
+
+## 4️⃣ Types of Jenkins Agents
+
+### 🔹 1. Permanent Agent (Static Agent)
+
+* Always running
+* Manually configured
+* Suitable for stable infrastructure
+
+### 🔹 2. Dynamic Agent
+
+* Created on demand
+* Auto-destroyed after job
+* Used in cloud/Kubernetes
+
+### 🔹 3. Docker Agent
+
+* Runs job inside container
+* Clean environment every build
+
+### 🔹 4. Kubernetes Agent
+
+* Uses Pod as agent
+* Very scalable
+* Common in DevOps pipelines
+
+---
+
+## 5️⃣ Agent Communication Methods
+
+✔️ SSH (Linux)
+✔️ Windows Service
+✔️ JNLP (Java Web Start)
+✔️ Kubernetes plugin
+✔️ Docker plugin
+
+---
+
+## 6️⃣ Important Terminologies
+
+| Term      | Meaning                               |
+| --------- | ------------------------------------- |
+| Node      | Machine configured in Jenkins         |
+| Agent     | Worker node                           |
+| Executor  | Number of parallel jobs agent can run |
+| Label     | Tag used to target specific agent     |
+| Workspace | Directory where build runs            |
+
+---
+
+## 7️⃣ Jenkinsfile Example Using Agent
+
+### Declarative Pipeline
+
+```groovy
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo Building...'
+            }
+        }
+    }
+}
+```
+
+### Specific Agent Label
+
+```groovy
+pipeline {
+    agent { label 'linux' }
+}
+```
+
+### Docker Agent
+
+```groovy
+pipeline {
+    agent {
+        docker {
+            image 'node:18'
+        }
+    }
+}
+```
+
+---
+
+## 8️⃣ Executor Concept (Important for Interview)
+
+* 1 executor = 1 parallel build
+* If agent has 4 executors → can run 4 builds simultaneously
+* Too many executors = CPU overload
+
+👉 Best Practice:
+Executors = Based on CPU cores & workload type
+
+---
+
+## 9️⃣ Best Practices
+
+✔️ Keep Controller lightweight
+✔️ Run builds on agents only
+✔️ Use labels wisely
+✔️ Use dynamic agents in cloud
+✔️ Monitor disk space
+✔️ Clean workspaces
+✔️ Use containerized agents for consistency
+✔️ Restrict production access
+
+---
+
+## 🔟 Common Interview Questions
+
+**Q1: Why not run builds on Controller?**
+👉 It affects performance & security.
+
+**Q2: What is difference between Node & Agent?**
+👉 Node = Configured machine.
+👉 Agent = Worker process running on node.
+
+**Q3: How do agents communicate?**
+👉 SSH, JNLP, Kubernetes plugin.
+
+**Q4: What is label in Jenkins?**
+👉 Used to assign job to specific agent.
+
+---
+
+## 1️⃣1️⃣ Static vs Dynamic Agents (Comparison)
+
+| Feature     | Static Agent  | Dynamic Agent      |
+| ----------- | ------------- | ------------------ |
+| Setup       | Manual        | Automated          |
+| Cost        | Higher        | Optimized          |
+| Scalability | Limited       | High               |
+| Use Case    | On-prem infra | Cloud-native CI/CD |
+
+---
+
+## 1️⃣2️⃣ Points to Remember (Exam/Interview Quick Notes)
+
+⭐ Jenkins follows Master-Agent architecture
+⭐ Agents execute jobs
+⭐ Executors control parallelism
+⭐ Labels route jobs
+⭐ Use Docker/K8s agents for modern pipelines
+⭐ Never overload controller
+⭐ Workspace cleanup is important
+⭐ Agents can run on different OS
+
+---
+
 ## 🔹 Jenkins Components
 
 * Job / Project
