@@ -1,4 +1,4 @@
-## 🔹 Jenkins – Key Theory Points (Bullets)
+## 🔹 Jenkins
 
 ### 🔹 What is Jenkins?
 
