@@ -1,5 +1,266 @@
+## 🔹 Jenkins – Key Theory Points (Bullets)
+
+### 🔹 What is Jenkins?
+
+* Open-source **Automation Server**
+* Used for **CI/CD (Continuous Integration & Continuous Deployment)**
+* Written in **Java**
+* Supports **plugins-based architecture**
+* Runs as **standalone (WAR), service, Docker container**
+
+---
+
+## 🔹 Core Concepts
+
+### 🔹 CI (Continuous Integration)
+
+* Developers push code to Git
+* Jenkins automatically:
+
+  * Pulls code
+  * Builds
+  * Tests
+  * Generates reports
+
+### 🔹 CD (Continuous Delivery/Deployment)
+
+* Automates:
+
+  * Packaging
+  * Deployment to Dev/Test/Prod
+  * Infrastructure provisioning
+
+---
+
+## 🔹 Jenkins Architecture
+
+* **Master (Controller)**
+
+  * Manages jobs
+  * Schedules builds
+  * Assigns work to agents
+  * Stores configuration
+
+* **Agent (Node/Slave)**
+
+  * Executes build jobs
+  * Can be Linux/Windows/Mac
+  * Can run inside Docker/Kubernetes
+
+* Communication via:
+
+  * SSH
+  * JNLP
+  * WebSocket
+
+---
+
+## 🔹 Jenkins Components
+
+* Job / Project
+* Build
+* Pipeline
+* Plugin
+* Workspace
+* Executor
+* Node
+* Trigger
+
+---
+
+## 🔹 Types of Jobs
+
+* Freestyle Project
+* Pipeline Project
+* Multibranch Pipeline
+* Folder
+* Maven Project
+
+---
+
+## 🔹 Pipeline Concepts
+
+* Defined as **Code (Pipeline as Code)**
+* Stored in `Jenkinsfile`
+* Written in **Groovy DSL**
+
+### Pipeline Types:
+
+* Declarative Pipeline (recommended)
+* Scripted Pipeline
+
+---
+
+## 🔹 Important Pipeline Blocks
+
+```groovy
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        echo "Building..."
+      }
+    }
+  }
+}
 ```
 
+Key Blocks:
+
+* pipeline
+* agent
+* stages
+* stage
+* steps
+* post
+* environment
+* parameters
+
+---
+
+## 🔹 Jenkins Triggers
+
+* Poll SCM
+* Webhook (GitHub/GitLab)
+* Scheduled (CRON)
+* Manual Trigger
+* Upstream Job
+
+---
+
+## 🔹 Plugins (Very Important)
+
+Common Plugins:
+
+* Git Plugin
+* Pipeline Plugin
+* Docker Plugin
+* Kubernetes Plugin
+* Blue Ocean
+* SonarQube
+* Email Extension
+
+👉 Jenkins strength = Plugin ecosystem
+
+---
+
+## 🔹 Security Concepts
+
+* Matrix-based security
+* Role-based access control (RBAC)
+* Credentials management
+* API Tokens
+* Secret Text / Username-Password / SSH Key
+* Integration with LDAP / AD / SSO
+
+---
+
+## 🔹 Credentials in Jenkins
+
+Stored securely in:
+
+* Global scope
+* Folder scope
+* System scope
+
+Used inside pipeline:
+
+```groovy
+withCredentials([])
+```
+
+---
+
+## 🔹 Jenkins File Structure
+
+* `/var/lib/jenkins` (Linux default home)
+* `config.xml`
+* `jobs/`
+* `workspace/`
+* `plugins/`
+
+---
+
+## 🔹 Distributed Builds
+
+* Improves performance
+* Scales horizontally
+* Used in enterprise CI/CD
+
+---
+
+## 🔹 Backup & Restore
+
+Important to backup:
+
+* JENKINS_HOME
+* plugins
+* credentials
+* jobs configuration
+
+---
+
+## 🔹 High Availability (HA)
+
+Jenkins itself:
+
+* Not fully HA by default
+* Use:
+
+  * Load Balancer
+  * External DB
+  * Cloud agents (K8s)
+
+---
+
+## 🔹 Jenkins vs Other Tools
+
+| Feature          | Jenkins    | GitHub Actions | Azure DevOps |
+| ---------------- | ---------- | -------------- | ------------ |
+| Open Source      | ✅          | ❌              | ❌            |
+| Plugin Ecosystem | Very Large | Limited        | Moderate     |
+| On-Prem Support  | Strong     | Limited        | Strong       |
+| UI Flexibility   | High       | Medium         | Medium       |
+
+---
+
+## 🔹 Best Practices
+
+* Use Pipeline instead of Freestyle
+* Store Jenkinsfile in Git
+* Use credentials binding
+* Avoid hardcoding secrets
+* Use agents instead of master execution
+* Regular plugin updates
+* Enable backups
+
+---
+
+## 🔹 Common Interview Questions Concepts
+
+* Difference between CI & CD
+* Declarative vs Scripted pipeline
+* Master vs Agent
+* How Jenkins handles parallel stages
+* How to secure Jenkins?
+* How to scale Jenkins?
+* What is Blue Ocean?
+
+---
+
+## 🔹 Advanced Concepts
+
+* Shared Libraries
+* Parallel Stages
+* Docker agents
+* Kubernetes dynamic agents
+* Jenkins in Kubernetes
+* Infrastructure as Code integration (Terraform, Ansible)
+
+---
+
+```
 jenkins | jenkins.pem | SG - Inbound - jenkins-8080 | t3.large, c7i-flex.large
 
 cd Downloads 
