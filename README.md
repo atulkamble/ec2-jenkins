@@ -46,6 +46,11 @@ docker run hello-world
 
 sudo usermod -aG docker $USER
 sudo usermod -aG docker jenkins
+sudo usermod -aG docker ec2-user
+newgrp docker
+
+docker ps
+
 sudo systemctl restart docker
 sudo systemctl restart jenkins
 
