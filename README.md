@@ -501,8 +501,16 @@ sudo systemctl daemon-reload
 jenkins --version 
 sudo systemctl start jenkins 
 sudo systemctl enable jenkins
+newgrp docker
 
+docker ps
+docker run hello-world
+
+sudo usermod -aG docker $USER
 sudo usermod -aG docker jenkins
+sudo systemctl restart docker
+sudo systemctl restart jenkins
+
 
 http://instance-public-ip:8080
 
