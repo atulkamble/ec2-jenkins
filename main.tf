@@ -96,6 +96,8 @@ resource "aws_instance" "jenkins" {
       "sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key",
       "sudo dnf install -y jenkins",
       "sudo usermod -aG docker jenkins",
+      "sudo usermod -aG docker ec2-user",
+      "newgrp docker"
       "sudo systemctl daemon-reload",
       "sudo systemctl enable jenkins",
       "sudo systemctl start jenkins",
