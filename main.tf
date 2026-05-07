@@ -97,7 +97,7 @@ resource "aws_instance" "jenkins" {
       "sudo dnf install -y jenkins",
       "sudo usermod -aG docker jenkins",
       "sudo usermod -aG docker ec2-user",
-      "newgrp docker"
+      "newgrp docker",
       "sudo systemctl daemon-reload",
       "sudo systemctl enable jenkins",
       "sudo systemctl start jenkins",
